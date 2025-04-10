@@ -3,6 +3,7 @@ package com.bruno.cursojavabasico.exercicios_20;
 import java.util.Scanner;
 
 public class ExercicioN5_2 {
+
 	public static void main(String[] args) {
 		String[][] jogoVelha = new String[3][3];
 
@@ -29,7 +30,7 @@ public class ExercicioN5_2 {
 					continue;
 				}
 
-				jogoVelha[linha][coluna] = String.valueOf(jogadorAtual);
+				jogoVelha[linha][coluna] = String.valueOf(jogadorAtual + " \t");
 
 				for (int i = 0; i < jogoVelha.length; i++) {
 					for (int j = 0; j < jogoVelha[i].length; j++) {
@@ -38,47 +39,56 @@ public class ExercicioN5_2 {
 					System.out.println("");
 				}
 				for (int i = 0; i < 3; i++) {
-					if (jogoVelha[i][0].charAt(0) == jogadorAtual && jogoVelha[i][1].charAt(0) == jogadorAtual && jogoVelha[i][2].charAt(0) == jogadorAtual) {
+					if (jogoVelha[i][0].equals(String.valueOf(jogadorAtual))&&
+							jogoVelha[i][1].equals(String.valueOf(jogadorAtual))&&
+							jogoVelha[i][2].equals(String.valueOf(jogadorAtual))) {
 						vencedor = true;
 						break;
 					}
 				}
+
 				if (!vencedor) {
 					for (int j = 0; j < 3; j++) {
-						if (jogoVelha[0][j].charAt(0) == jogadorAtual && jogoVelha[1][j].charAt(0) == jogadorAtual && jogoVelha[2][j].charAt(0) == jogadorAtual) {
+						if (jogoVelha[0][j].equals(String.valueOf(jogadorAtual)) &&
+								jogoVelha[1][j].equals(String.valueOf(jogadorAtual)) &&
+								jogoVelha[2][j].equals(String.valueOf(jogadorAtual))) {
 							vencedor = true;
 							break;
 						}
 					}
-					if (!vencedor) {
-						if (jogoVelha[0][0].charAt(0) == jogadorAtual && jogoVelha[1][1].charAt(0) == jogadorAtual && jogoVelha[2][2].charAt(0) == jogadorAtual) {
-							vencedor = true;
-						} else if (jogoVelha[0][2].charAt(0) == jogadorAtual && jogoVelha[1][1].charAt(0) == jogadorAtual && jogoVelha[2][0].charAt(0) == jogadorAtual) {
-							vencedor = true;
-						}
-					}
-					if(vencedor){
-						System.out.println("O vencedor foi o jogador " + jogadorAtual);
-						break;
-					}
-					boolean velha = true;
-					for (int i = 0; i < jogoVelha.length; i++) {
-						for (int j = 0; j < jogoVelha[i].length; j++) {
-							if(jogoVelha[i][j].equals("[Vazio]")){
-								velha = false;
-								break;
-							}
-							if(!velha){
-								break;
-							}
-						}
-					}
-					if(velha){
-						System.out.println("O jogo deu velha !!!");
-						break;
-					}
-					jogadorAtual = (jogadorAtual == 'X') ? 'O' : 'X';
 				}
+				if (!vencedor) {
+					if (jogoVelha[0][0].equals(String.valueOf(jogadorAtual))&&
+							jogoVelha[1][1].equals(String.valueOf(jogadorAtual))&&
+							jogoVelha[2][2].equals(String.valueOf(jogadorAtual))) {
+						vencedor = true;
+					} else if (jogoVelha[2][0].equals(String.valueOf(jogadorAtual))&&
+							jogoVelha[1][1].equals(String.valueOf(jogadorAtual))&&
+							jogoVelha[0][2].equals(String.valueOf(jogadorAtual))) {
+						vencedor = true;
+					}
+				}
+				if(vencedor){
+					System.out.println("O vencedor foi o jogador " + jogadorAtual);
+					break;
+				}
+				boolean velha = true;
+				for (int i = 0; i < jogoVelha.length; i++) {
+					for (int j = 0; j < jogoVelha[i].length; j++) {
+						if(jogoVelha[i][j].equals("[Vazio]")){
+							velha = false;
+							break;
+						}
+					}
+					if(!velha){
+						break;
+					}
+				}
+				if(velha){
+					System.out.println("O jogo deu velha !!!");
+					break;
+				}
+				jogadorAtual = (jogadorAtual == 'X') ? 'O' : 'X';
 			}
 		}
 	}
